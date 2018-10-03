@@ -6,3 +6,4 @@ git_source(:github) {|repo_name| "https://github.com/simonassank/ktu-stpp" }
 
 gem 'sinatra'
 gem 'json'
+gem 'sinatra-contrib'

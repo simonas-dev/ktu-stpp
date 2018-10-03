@@ -1,5 +1,7 @@
 require 'sinatra'
-require 'json'
+require 'sinatra/json'
+
+set :environment, :production
 
 # Author
 THE_AUTHOR = {
@@ -59,7 +61,6 @@ BOOK_DB = [
 
 last_id = 4
 
-
 # Create
 post '/book' do
   last_id += 1
@@ -70,7 +71,7 @@ post '/book' do
     summmary: body['summmary'],
     page_count: body['page_count']
   }
-  BOOK_DB.push(book).to_json
+  json BOOK_DB.push(book)
 end
 
 # Update
@@ -82,7 +83,7 @@ put '/book/:id' do
     book[:name] = body['name']
     book[:summmary] = body['summmary']
     book[:page_count] = body['page_count']
-    body book.to_json
+    json book
   else
     status 404
     body "Which Book?"
@@ -94,7 +95,7 @@ get '/book/:id' do
   id = params['id'].to_i
   book = BOOK_DB.find {|book| book[:id] == id }
   if book
-    body book.to_json
+    json book
   else
     status 404
     body "Which Book?"
@@ -106,7 +107,7 @@ get '/book/:id/authors' do
   id = params['id'].to_i
   book = BOOK_DB.find {|book| book[:id] == id }
   if book
-    body book[:author_list].to_json
+    json book[:author_list]
   else
     status 404
     body "Which Book?"
@@ -115,7 +116,7 @@ end
 
 # Read List
 get '/book' do
-  BOOK_DB.to_json
+  json BOOK_DB
 end
 
 # Delete
@@ -123,9 +124,14 @@ delete '/book/:id' do
   id = params['id'].to_i
   book = BOOK_DB.find {|book| book[:id] == id } 
   if book
-    body BOOK_DB.delete(book).to_json
+    json BOOK_DB.delete(book)
   else
     status 404
     body "Which Book?"
   end
+end
+
+error Sinatra::NotFound do
+  content_type 'text/plain'
+  [400, 'Bad Request']
 end
