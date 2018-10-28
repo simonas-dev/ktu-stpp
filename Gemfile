@@ -16,8 +16,9 @@ gem 'oauth2'
 gem 'mongo'
 gem 'bson_ext'
 gem 'mongo_mapper'
+gem 'activemodel', '4.2.9'
 
 group :development do
   gem 'guard'
-  gem 'guard-shell'
+  gem 'guard-process'
 end

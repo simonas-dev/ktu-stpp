@@ -6,5 +6,5 @@ class Book
   key :summmary, String
   key :page_count, Integer
   
-  many :authors
+  # many :authors
 end

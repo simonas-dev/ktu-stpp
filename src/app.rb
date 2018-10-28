@@ -1,19 +1,14 @@
 require 'sinatra'
 require 'sinatra/json'
+require 'active_model'
 require 'mongo'
 require 'mongo_mapper'
+# require './src/models/book.rb'
 
 set :environment, :production
-s
-
 
 configure do
   MongoMapper.setup({'production' => {'uri' => ENV['127.0.0.1:27017']}}, 'test')
-end
-
-get '/collections/?' do
-  content_type :json
-  settings.mongo_db.database.collection_names.to_json
 end
 
 # Create
@@ -70,7 +65,7 @@ end
 
 # Read List
 get '/book' do
-  json BOOK_DB
+  json Book.all
 end
 
 # Delete
@@ -83,6 +78,17 @@ delete '/book/:id' do
     status 404
     body "Which Book?"
   end
+end
+
+class Book
+  include MongoMapper::Document
+  
+  key :id, String
+  key :name, String
+  key :summmary, String
+  key :page_count, Integer
+  
+  # many :authors
 end
 
 error Sinatra::NotFound do

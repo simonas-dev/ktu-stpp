@@ -1,5 +1,7 @@
 ignore %r{^ignored/path/}, /db/
 
-guard :shell do
-  watch(/.*/) { `git status` }
+fork { `mongod --dbpath db/` }
+
+guard 'process', :name => 'API Runner', :command => 'ruby src/app.rb' do
+  watch(/src\/.*/)
 end
