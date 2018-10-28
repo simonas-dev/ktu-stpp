@@ -4,6 +4,20 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/simonassank/ktu-stpp" }
 
+# Sinatra Core
 gem 'sinatra'
 gem 'json'
 gem 'sinatra-contrib'
+
+# Auth
+gem 'oauth2'
+
+# MongoDb
+gem 'mongo'
+gem 'bson_ext'
+gem 'mongo_mapper'
+
+group :development do
+  gem 'guard'
+  gem 'guard-shell'
+end
