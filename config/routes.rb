@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'landing/index'
+
   # Home
-  root to: "home#index"
+  root to: "landing#index"
   
   # Admin
   get "/admin", to: "admin#index"
