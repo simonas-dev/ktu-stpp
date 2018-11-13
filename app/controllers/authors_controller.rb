@@ -5,6 +5,11 @@ class AuthorsController < ApplicationController
     :update,
     :destroy
   ]
+  # before_action :authenticate_user!, only: [
+  #   :create,
+  #   :update,
+  #   :destroy
+  # ]
   
   # GET /author
   def index

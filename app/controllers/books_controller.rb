@@ -6,7 +6,12 @@ class BooksController < ApplicationController
     :destroy,
     :authors
   ]
-
+  # before_action :authenticate_user!, only: [
+  #   :create,
+  #   :update,
+  #   :destroy
+  # ]
+  
   # GET /author
   def index
     @models = Book.all

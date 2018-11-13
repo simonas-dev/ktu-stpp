@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  root to: "home#index"
+  get "/admin", to: "admin#index"
+  
   scope '/api' do
     scope '/v1' do
       scope '/author' do
