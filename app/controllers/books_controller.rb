@@ -1,16 +1,15 @@
-class BooksController < ApplicationController
-  skip_before_action :verify_authenticity_token
+class BooksController < ApiController
   before_action :set_model, only: [
     :show,
     :update,
     :destroy,
     :authors
   ]
-  # before_action :authenticate_user!, only: [
-  #   :create,
-  #   :update,
-  #   :destroy
-  # ]
+  before_action :doorkeeper_authorize!, only: [
+    :create,
+    :update,
+    :destroy
+  ]
   
   # GET /author
   def index
