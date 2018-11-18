@@ -18,17 +18,31 @@
 
   <body>
     <div id="app">
-    <h1>Hello App!</h1>
-      <p>
-        <!-- use router-link component for navigation. -->
-        <!-- specify the link by passing the `to` prop. -->
-        <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
-        <router-link to="/foo">Go to Foo</router-link>
-        <router-link to="/bar">Go to Bar</router-link>
-      </p>
-      <!-- route outlet -->
-      <!-- component matched by the route will render here -->
-      <router-view></router-view>
-    </html>
+      <b-container>
+        
+        <div id="header">
+          <h1>📚.app</h1>
+          <p>
+          <!-- use router-link component for navigation. -->
+          <!-- specify the link by passing the `to` prop. -->
+          <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+          <b-nav tabs>
+            <b-nav-item to="/home">Home</b-nav-item>
+            <b-nav-item to="/login">Login</b-nav-item>
+            <b-nav-item to="/register">Register</b-nav-item>
+          </b-nav>
+        </p>
+        </div>
+
+        <router-view></router-view>
+        
+        <div id="footer">
+          <p class="lead">© 2018 Simonas Sankauskas, Inc.</p>
+          <p>KTU "Saityno taikomųjų programų projektavimas" project.</p>
+          <a href="https://github.com/simonassank/ktu-stpp" target="_self" class="btn btn-primary">Source Code</a>
+        </div>
+
+      </b-container>
+    </div>
   </body>
 </html>

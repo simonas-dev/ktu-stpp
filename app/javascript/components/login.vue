@@ -33,12 +33,14 @@
             handleSubmit(e){
                 e.preventDefault()
                 if (this.password.length > 0) {
-                    this.$http.post('http://localhost:3000/login', {
+                    this.$http.post('http://localhost:3000/oauth/token', {
+                        grant_type: "password",
                         email: this.email,
                         password: this.password
                     })
                     .then(response => {
                         console.log(response)
+                        localStorage.setItem('token', JSON.stringify(response.data))
                     })
                     .catch(function (error) {
                         console.error(error.response)

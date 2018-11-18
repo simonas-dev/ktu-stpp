@@ -17,4 +17,7 @@
     font-size: 9em;
     text-align: center;
   }
+  #footer {
+      background-color: "#eee";
+  }
 </style>

@@ -1,4 +1,5 @@
 class AuthController < ApiController
+  
   def register
     @user = Admin.create(req_params)
     @user.save!

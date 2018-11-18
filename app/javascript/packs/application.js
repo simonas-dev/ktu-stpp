@@ -13,90 +13,71 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue from 'vue/dist/vue.esm'
 import BootstrapVue from 'bootstrap-vue'
 import VueRouter from 'vue-router'
+import Axios from 'axios'
+
+import Login from 'components/login'
+import Register from 'components/register'
+import BookList from 'components/book_list'
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
+Vue.prototype.$http = Axios;
 
-// 1. Define route components.
-// These can be imported from other files
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
-
-// 2. Define some routes
-// Each route should map to a component. The "component" can
-// either be an actual component constructor created via
-// `Vue.extend()`, or just a component options object.
-// We'll talk about nested routes later.
 const routes = [
+  { path: '/', redirect: '/home' },
   {
-    path: '/',
-    name: 'HelloWorld',
-    component: HelloWorld
+    path: '/login',
+    name: 'login',
+    component: Login,
+    meta: { 
+      guest: true
+    }
   },
   {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: { 
-          guest: true
-      }
+    path: '/register',
+    name: 'register',
+    component: Register,
+    meta: { 
+      guest: true
+    }
   },
   {
-      path: '/register',
-      name: 'register',
-      component: Register,
-      meta: { 
-          guest: true
-      }
+    path: '/home',
+    name: 'book list',
+    component: BookList,
+    meta: { 
+      guest: true
+    }
   },
-  {
-      path: '/admin',
-      name: 'admin',
-      component: Admin,
-      meta: { 
-          requiresAuth: true,
-      }
-  },
+  // {
+  //   path: '/admin',
+  //   name: 'admin',
+  //   component: Admin,
+  //   meta: { 
+  //     requiresAuth: true,
+  //   }
+  // },
 ]
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = new VueRouter({
-  base: "/foo",
   routes // short for `routes: routes`
 })
 
-router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)) {
-      if (localStorage.getItem('jwt') == null) {
-          next({
-              path: '/login',
-              params: { nextUrl: to.fullPath }
-          })
-      } else {
-          let user = JSON.parse(localStorage.getItem('user'))
-          if(to.matched.some(record => record.meta.is_admin)) {
-              if(user.is_admin == 1){
-                  next()
-              } else{
-                  next({ name: 'userboard'})
-              }
-          }else {
-              next()
-          }
-      }
-  } else if(to.matched.some(record => record.meta.guest)) {
-      if(localStorage.getItem('jwt') == null){
-          next()
-      }
-      else{
-          next({ name: 'userboard'})
-      }
-  }else {
-      next() 
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if (localStorage.getItem('jwt') == null) {
+//       next({
+//         path: '/login',
+//         params: { nextUrl: to.fullPath }
+//       })
+//     }
+//   } else if(to.matched.some(record => record.meta.guest)) {
+      
+//   }
+// })
 
 // Now the app has started!
 document.addEventListener('DOMContentLoaded', () => {
@@ -108,4 +89,3 @@ document.addEventListener('DOMContentLoaded', () => {
     router
   }).$mount('#app')
 })
-

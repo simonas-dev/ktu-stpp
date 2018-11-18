@@ -24,7 +24,7 @@ class BooksController < ApiController
 
   # POST /author
   def create
-    @model = Book.create!(book_params)
+    @model = Book.create!(create_params)
     render json: @model, status: :ok
   end
 
