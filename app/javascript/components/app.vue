@@ -1,7 +1,5 @@
 <template>
-  <div id='app'>
     <p id='wtf'>{{ message }}</p>
-  </div>
 </template>
 
 <script>
