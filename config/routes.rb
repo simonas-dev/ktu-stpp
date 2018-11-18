@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "/admin", to: "admin#index"
 
   # Devise
-  devise_for :admins
+  # devise_for :admins
 
   # Oauth2
   use_doorkeeper do
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # RESTful API 
   scope '/api' do
     scope '/v1' do
+      scope '/register' do
+        post '/' => 'auth#register'
+      end
       scope '/author' do
         get '/' => 'authors#index'
         post '/' => 'authors#create'
