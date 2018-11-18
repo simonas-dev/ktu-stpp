@@ -1,0 +1,14 @@
+<!-- this is the same id we reffered in the vue file -->
+<!-- for consisteny, I also follow a convention in this -->
+<!-- {folder-paths}-{action}-view -->
+<div id="devise-registrations-new-view">
+  <!-- we talked about passing the validation error to vue -->
+  <!-- here is how easy it is to do this -->
+  <devise-registrations-new-view :errors="<%= resource.errors.full_messages %>">
+  </devise-registrations-new-view>
+</div>
+
+
+<!-- these is how we say rails to include the javascript and stylesheet generated -->
+<%= javascript_pack_tag 'devise/registrations/new'%>
+<%= stylesheet_pack_tag 'devise/registrations/new'%>
