@@ -3,8 +3,9 @@
   <head>
     <title>KtuStpp</title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
 
@@ -19,27 +20,29 @@
   <body>
     <div id="app">
       <b-container>
-        
-        <div id="header">
-          <h1>📚.app</h1>
+        <div class="header">
+          <h1 class="header-title">📚.app</h1>
           <p>
           <!-- use router-link component for navigation. -->
           <!-- specify the link by passing the `to` prop. -->
           <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
-          <b-nav tabs>
+          <b-nav pills>
             <b-nav-item to="/home">Home</b-nav-item>
             <b-nav-item to="/login">Login</b-nav-item>
             <b-nav-item to="/register">Register</b-nav-item>
+            <b-nav-item to="/admin">Admin</b-nav-item>
           </b-nav>
         </p>
         </div>
 
-        <router-view></router-view>
+        <router-view class="content"></router-view>
         
-        <div id="footer">
-          <p class="lead">© 2018 Simonas Sankauskas, Inc.</p>
-          <p>KTU "Saityno taikomųjų programų projektavimas" project.</p>
-          <a href="https://github.com/simonassank/ktu-stpp" target="_self" class="btn btn-primary">Source Code</a>
+        <div class="footer card text-secondary">
+          <div class="card-body">
+            <p class="lead">© 2018 Simonas Sankauskas, Inc.</p>
+            <p>KTU "Saityno taikomųjų programų projektavimas" project.</p>
+            <a class="btn card-link btn-outline-primary" href="https://github.com/simonassank/ktu-stpp" target="_self">Source Code</a>
+          </div>
         </div>
 
       </b-container>

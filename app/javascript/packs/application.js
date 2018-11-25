@@ -18,9 +18,16 @@ import Axios from 'axios'
 import Login from 'components/login'
 import Register from 'components/register'
 import BookList from 'components/book_list'
+import BookEdit from 'components/book_edit'
+import Admin from 'components/admin'
 
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
+
+var tokenObj = JSON.parse(localStorage.getItem('token'))
+var tokenHeader = `Bearer ${tokenObj.access_token}`
+Axios.defaults.headers.common['Authorization'] = tokenHeader
+
 Vue.prototype.$http = Axios;
 
 const routes = [
@@ -30,7 +37,7 @@ const routes = [
     name: 'login',
     component: Login,
     meta: { 
-      guest: true
+      requiresAuth: false
     }
   },
   {
@@ -38,7 +45,7 @@ const routes = [
     name: 'register',
     component: Register,
     meta: { 
-      guest: true
+      requiresAuth: false
     }
   },
   {
@@ -46,17 +53,25 @@ const routes = [
     name: 'book list',
     component: BookList,
     meta: { 
-      guest: true
+      requiresAuth: false
     }
   },
-  // {
-  //   path: '/admin',
-  //   name: 'admin',
-  //   component: Admin,
-  //   meta: { 
-  //     requiresAuth: true,
-  //   }
-  // },
+  {
+    path: '/admin',
+    name: 'admin dashboard',
+    component: Admin,
+    meta: { 
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/admin/book/:id',
+    name: 'edit boook',
+    component: BookEdit,
+    meta: { 
+      requiresAuth: true
+    }
+  },
 ]
 
 // 3. Create the router instance and pass the `routes` option
@@ -66,18 +81,18 @@ const router = new VueRouter({
   routes // short for `routes: routes`
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (localStorage.getItem('jwt') == null) {
-//       next({
-//         path: '/login',
-//         params: { nextUrl: to.fullPath }
-//       })
-//     }
-//   } else if(to.matched.some(record => record.meta.guest)) {
-      
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  var isLoggedIn = localStorage.getItem('token') != null
+  var requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if (requiresAuth && !isLoggedIn) {
+    next({
+      path: '/login',
+      params: { nextUrl: to.fullPath }
+    })
+  } else {
+    next(next)
+  }
+})
 
 // Now the app has started!
 document.addEventListener('DOMContentLoaded', () => {

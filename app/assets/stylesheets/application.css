@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: Futura, Helvetica, sans-serif !important;
+}
+
+.header {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.header-title {
+  margin-bottom: 1em;
+}
+
+.footer {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.content {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
