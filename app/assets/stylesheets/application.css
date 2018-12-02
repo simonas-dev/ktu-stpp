@@ -15,7 +15,9 @@
  */
 
 body {
-  font-family: Futura, Helvetica, sans-serif !important;
+  font-family: Futura, sans-serif !important;
+  /*font-family: 'Didact Gothic', sans-serif !important;*/
+  font-family: 'IBM Plex Mono', monospace !important;
 }
 
 .header {
@@ -35,4 +37,8 @@ body {
 .content {
   padding-top: 2em;
   padding-bottom: 2em;
+}
+
+.table td, .table th {
+  vertical-align: middle !important;
 }

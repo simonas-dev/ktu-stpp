@@ -15,7 +15,9 @@ import BootstrapVue from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import Axios from 'axios'
 
+import App from 'app.vue'
 import Login from 'components/login'
+import Logout from 'components/logout'
 import Register from 'components/register'
 import BookList from 'components/book_list'
 import BookEdit from 'components/book_edit'
@@ -24,14 +26,48 @@ import Admin from 'components/admin'
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 
-var tokenObj = JSON.parse(localStorage.getItem('token'))
-var tokenHeader = `Bearer ${tokenObj.access_token}`
-Axios.defaults.headers.common['Authorization'] = tokenHeader
-
 Vue.prototype.$http = Axios;
+
+function setAuthHeaders(userModel) {
+  var userObj = JSON.parse(userModel)
+  console.log(typeof userObj)
+  console.log(userObj)
+  if (userObj != null) {
+    var tokenHeader = `Bearer ${userObj.access_token}`
+    Axios.defaults.headers.common['Authorization'] = tokenHeader  
+  } else {
+    Axios.defaults.headers.common['Authorization'] = null 
+  }
+}
+
+Vue.prototype.$user = localStorage.getItem('token')
+
+Vue.prototype.$setUser = function(userModel) {
+  var userModelString = JSON.stringify(userModel)
+  if (userModel == null) {
+    userModelString = null
+  }
+  
+  console.log("Logged In")
+  console.log(userModelString)
+  localStorage.setItem('token', userModelString)
+  setAuthHeaders(userModelString)
+
+  Vue.prototype.$user = userModelString
+}
+
+setAuthHeaders(Vue.prototype.$user)
 
 const routes = [
   { path: '/', redirect: '/home' },
+  { 
+    path: '/logout',
+    name: 'logout',
+    component: Logout,
+    meta: {
+      requiresAuth: false
+    }
+  },
   {
     path: '/login',
     name: 'login',
@@ -94,6 +130,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+Vue.config.productionTip = false
+
 // Now the app has started!
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(document.createElement('app'))
@@ -101,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Make sure to inject the router with the router option to make the
   // whole app router-aware.
   const app = new Vue({
-    router
+    router,
+    render: h => h(App)
   }).$mount('#app')
 })

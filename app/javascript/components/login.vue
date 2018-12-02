@@ -24,7 +24,7 @@
     },
     methods : {
       handleSubmit(e){
-        error = null
+        this.error = null
         e.preventDefault()
         this.$http.post('http://localhost:3000/oauth/token', {
           grant_type: "password",
@@ -33,11 +33,12 @@
         })
         .then(response => {
           console.log(response)
-          localStorage.setItem('token', JSON.stringify(response.data))
+          this.$setUser(response.data)
+          this.$router.push('/')
         })
         .catch(errorLog => {
-          const errorText = `${errorLog.response.status} ${errorLog.response.statusText}`
-          console.error(errorText)
+          const errorText = `${errorLog.response.data}`
+          console.error(JSON.stringify(errorLog))
           this.error = errorText
         });
       }

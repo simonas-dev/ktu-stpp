@@ -6,7 +6,7 @@
             <h4 class="card-title text-dark">{{ value.name }}</h4>
             <div class="card-subtitle mb-2 text-muted">
               <div v-for="author in value.authors">
-              <a href="#" class="badge badge-pill badge-light" >
+              <a class="badge badge-pill badge-light" >
                 {{ author.first_name }} {{ author.last_name }}
               </a>
               </div>
@@ -39,18 +39,13 @@
     created() {
       this.$http.get("http://localhost:3000/api/v1/book", {})
       .then(response => {
-        console.log(response)
         response.data.forEach(function(item) {
           var dateText = item.updated_at
-          console.log(dateText)
           var date = new Date(dateText)
-          console.log(date)
           var text = new TimeAgo("en").format(date)
-          console.log(text)
           item.timeAgo = text 
         })
         this.bookList = response.data;
-        console.log(this.bookList)
       })
       .catch(error => {
         console.error(error);

@@ -47,7 +47,10 @@ class AuthorsController < ApiController
   end
 
   def set_model
-    @model = Book.find(params[:id])
+    @model = Author.where(id: params[:id]).first
+    if @model == nil
+      render plain: "Author Not Found!", status: :not_found
+    end
   end
 
 end

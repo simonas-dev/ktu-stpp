@@ -265,3 +265,12 @@ Doorkeeper::JWT.configure do
   # `nil`.
   encryption_method :hs512
 end
+
+module CustomTokenErrorResponse
+  def body
+    "Incorrect Login Credentials!"
+  end
+end
+
+Doorkeeper::OAuth::ErrorResponse.send :prepend, CustomTokenErrorResponse
+
