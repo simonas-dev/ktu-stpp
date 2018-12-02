@@ -6,7 +6,7 @@
       <div class="mb-3">
         <b-button type="submit" @click="newBook" variant="outline-success">NEW BOOK</b-button>
       </div>
-      <b-table hover :items="bookList" :fields="fields" @row-clicked="showEditBookModal">
+      <b-table hover :items="bookList" :fields="fields" v-on:row-clicked.self="showEditBookModal">
         
         <template slot="created_at" slot-scope="data">
           {{ data.item.created_ago }}
@@ -18,16 +18,18 @@
           <b-container fluid>
           <b-row align-v="center">
             <b-button v-if="!data.item.is_deleted"
+                    style="width: 100%;text-align: center;"
                     align-v="center"
                     variant="outline-danger"
-                    @click="deleteBook(data.item)">
+                    @click.stop="deleteBook(data.item)">
                     DELETE
             </b-button>
 
-            <h2 v-if="data.item.is_deleted"
+            <div v-if="data.item.is_deleted"
+                style="font-size: 1.6rem; width: 100%; text-align: center;"
                 align-v="center">
               💣
-            </h2>
+            </div>
           </b-row>
         </b-container>
         </template>
@@ -89,18 +91,20 @@
     },
     methods: {
       showEditBookModal: function(item) {
-        this.$router.push(`/admin/book/${item.id}`)
+        if (!item.is_deleted) {
+          this.$router.push(`/admin/book/${item.id}`)
+        }
       },
       deleteBook: function(book) {
         this.$http.delete(`http://localhost:3000//api/v1/book/${book.id}`, {})
         .then(response => {
           var index = this.bookList.indexOf(book);
-          book.is_deleted = true
-          copyBookList = this.bookList
-          copyBookList[index] = book
-          this.bookList = copyBookList
+          this.bookList[index].is_deleted = book
+          this.$forceUpdate();
+
         })
         .catch(error => {
+          console.log(error)
           this.error = error
         })
       },

@@ -100,8 +100,9 @@
           this.model = response.data
           this.apiResponse = "☁️ Created!"
           this.isCreate = false
-          this.$router.replace(`/admin/book/${this.model.id}`)
+          console.log(`replace/admin/book/${this.model.id}`)
           setTimeout(() => {
+            this.$router.replace(`/admin/book/${this.model.id}`)
             this.apiResponse = null
           }, 1000)
         })
