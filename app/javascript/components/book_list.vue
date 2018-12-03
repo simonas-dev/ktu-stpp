@@ -1,27 +1,29 @@
 <template>
-    <div>
-      <div class="book-list-container" id="v-for-object" >
-        <div class="card book-item mb-3" v-for="value in bookList">
-          <div class="card-body">
-            <h4 class="card-title text-dark">{{ value.name }}</h4>
-            <div class="card-subtitle mb-2 text-muted">
-              <div v-for="author in value.authors">
+  <div>
+    <div class="book-list-container" id="v-for-object" >
+      <div class="card book-item mb-3" v-for="value in bookList">
+        <div class="card-body">
+          <h4 class="card-title text-dark">
+            {{ value.name }}
+          </h4>
+          <div class="card-subtitle mb-2 text-muted">
+            <div v-for="author in value.authors">
               <a class="badge badge-pill badge-light" >
                 {{ author.first_name }} {{ author.last_name }}
               </a>
-              </div>
             </div>
-            <p class="card-text text-secondary">
-              {{ value.summmary }}
-            </p>
-            <p class="card-text">
-              <small class="text-muted">
-                Updated {{ value.timeAgo }}
-              </small>
-            </p>
           </div>
+          <p class="card-text text-secondary">
+            {{ value.summmary }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Updated {{ value.timeAgo }}
+            </small>
+          </p>
         </div>
       </div>
+    </div>
   </div>
 </template>
 

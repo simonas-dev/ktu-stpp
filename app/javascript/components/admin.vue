@@ -1,21 +1,20 @@
 <template>
-    <div>
-      <div v-if="error != null" class="alert alert-danger" role="alert">
-        {{ error }}
-      </div>
-      <div class="mb-3">
-        <b-button type="submit" @click="newBook" variant="outline-success">NEW BOOK</b-button>
-      </div>
-      <b-table hover :items="bookList" :fields="fields" v-on:row-clicked.self="showEditBookModal">
-        
-        <template slot="created_at" slot-scope="data">
-          {{ data.item.created_ago }}
-        </template>
-        <template slot="updated_at" slot-scope="data">
-          {{ data.item.updated_ago }}
-        </template>
-        <template slot="actions" slot-scope="data">
-          <b-container fluid>
+  <div>
+    <div v-if="error != null" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+    <div class="mb-3">
+      <b-button type="submit" @click="newBook" variant="outline-success">NEW BOOK</b-button>
+    </div>
+    <b-table hover :items="bookList" :fields="fields" v-on:row-clicked.self="showEditBookModal">   
+      <template slot="created_at" slot-scope="data">
+        {{ data.item.created_ago }}
+      </template>
+      <template slot="updated_at" slot-scope="data">
+        {{ data.item.updated_ago }}
+      </template>
+      <template slot="actions" slot-scope="data">
+        <b-container fluid>
           <b-row align-v="center">
             <b-button v-if="!data.item.is_deleted"
                     style="width: 100%;text-align: center;"
@@ -32,8 +31,8 @@
             </div>
           </b-row>
         </b-container>
-        </template>
-      </b-table>
+      </template>
+    </b-table>
   </div>
 </template>
 
