@@ -4,9 +4,18 @@
       {{ error }}
     </div>
     <div class="mb-3">
-      <b-button type="submit" @click="newBook" variant="outline-success">NEW BOOK</b-button>
+      <b-button 
+          type="submit"
+          @click="newBook"
+          variant="outline-success">
+        NEW BOOK
+      </b-button>
     </div>
-    <b-table hover :items="bookList" :fields="fields" v-on:row-clicked.self="showEditBookModal">   
+    <b-table
+        hover
+        :items="bookList"
+        :fields="fields"
+        v-on:row-clicked.self="showEditBookModal">   
       <template slot="created_at" slot-scope="data">
         {{ data.item.created_ago }}
       </template>

@@ -4,20 +4,33 @@
       {{ error }}
     </div>
     <b-input-group class="mb-3" prepend="Email Address">
-      <b-form-input id="email" type="email" v-model="email" required></b-form-input>
+      <b-form-input
+          id="email"
+          type="email"
+          v-model="email"
+          required></b-form-input>
     </b-input-group>
     <b-input-group class="mb-3" prepend="Password">
-      <b-form-input id="password" type="password" v-model="password" required></b-form-input>
+      <b-form-input
+          id="password"
+          type="password"
+          v-model="password"
+          required></b-form-input>
     </b-input-group>
     <b-input-group>
-      <b-form-checkbox class="mb-3" id="checkbox1"
-                       v-model="isSoulSold"
-                       value="accepted"
-                       unchecked-value="not_accepted">
+      <b-form-checkbox
+          class="mb-3" id="checkbox1"
+          v-model="isSoulSold"
+          value="accepted"
+          unchecked-value="not_accepted">
         I accept the terms and conditions of selling my soul to the devil.
       </b-form-checkbox>
     </b-input-group>
-    <b-button variant="outline-primary" @click="handleSubmit">REGISTER</b-button>
+    <b-button 
+        variant="outline-primary"
+        @click="handleSubmit">
+      REGISTER
+    </b-button>
   </div>
 </template>
 

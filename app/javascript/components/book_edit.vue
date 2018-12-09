@@ -7,10 +7,11 @@
       </b-input-group>
       
       <b-input-group class="mb-3" prepend="Summary">
-        <b-form-textarea v-model="model.summmary"
-                     placeholder="Enter something"
-                     :rows="2">
-      </b-form-textarea>
+        <b-form-textarea
+            v-model="model.summmary"
+            placeholder="Enter something"
+            :rows="2">
+        </b-form-textarea>
       </b-input-group>
 
       <b-input-group class="mb-3" prepend="Page Count">
@@ -19,13 +20,32 @@
       <b-col class="mb-3">
         <h5 class="mb-1">Authors</h5>
         <div class="mb-3">
-          <b-button type="submit" @click="addAuthor" variant="outline-success">NEW AUTHOR</b-button>
+          <b-button 
+              @click="addAuthor"
+              variant="outline-success">
+            NEW AUTHOR
+          </b-button>
         </div>
         <div v-for="author in model.authors">
-          <b-form-input class="mb-1" id="password" v-model="author.first_name"></b-form-input>
-          <b-form-input class="mb-1" id="password" v-model="author.last_name"></b-form-input>
-          <b-form-input class="mb-1" id="password" v-model="author.group"></b-form-input>
-          <b-button class="mb-3" variant="outline-danger" @click="deleteAuthor(author)">DELETE</b-button>
+          <b-form-input 
+              class="mb-1"
+              placeholder="First Name"
+              v-model="author.first_name"></b-form-input>
+          <b-form-input
+              class="mb-1"
+              placeholder="Last Name"
+              v-model="author.last_name"></b-form-input>
+          <b-form-input 
+              class="mb-1"
+              placeholder="Group"
+              v-model="author.group">
+          </b-form-input>
+          <b-button
+              class="mb-3"
+              variant="outline-danger"
+              @click="deleteAuthor(author)">
+            DELETE
+          </b-button>
         </div>
       </b-col>
 
@@ -36,10 +56,14 @@
         {{ apiResponse }}
       </div>
       <div v-if="!isCreate" class="mb-3">
-        <b-button type="submit" @click="saveBook" variant="outline-primary">UPDATE</b-button>
+        <b-button @click="saveBook" variant="outline-primary">UPDATE</b-button>
       </div>
       <div v-if="isCreate" class="mb-3">
-        <b-button type="submit" @click="createBook" variant="outline-primary">CREATE</b-button>
+        <b-button
+            @click="createBook"
+            variant="outline-primary">
+          CREATE
+        </b-button>
       </div>
     </b-form>
   </div>
@@ -100,9 +124,8 @@
           this.model = response.data
           this.apiResponse = "☁️ Created!"
           this.isCreate = false
-          console.log(`replace/admin/book/${this.model.id}`)
+          this.$router.replace(`/admin/book/${this.model.id}`)
           setTimeout(() => {
-            this.$router.replace(`/admin/book/${this.model.id}`)
             this.apiResponse = null
           }, 1000)
         })
