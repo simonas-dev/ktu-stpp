@@ -1,16 +1,16 @@
 class BooksController < ApiController
-  before_action :set_model, only: [
-    :show,
-    :update,
-    :destroy,
-    :authors
+  before_action :set_model, only: %i[
+    show
+    update
+    destroy
+    authors
   ]
-  before_action :doorkeeper_authorize!, only: [
-    :create,
-    :update,
-    :destroy
+  before_action :doorkeeper_authorize!, only: %i[
+    create
+    update
+    destroy
   ]
-  
+
   # GET /author
   def index
     @models = Book.all
@@ -31,15 +31,15 @@ class BooksController < ApiController
   # PUT /author/:id
   def update
     params = update_params
-    params[:authors] = params[:authors].map { |a|
+    params[:authors] = params[:authors].map do |a|
       author = Author.find_by(id: a[:id])
-      if a[:id] != nil
+      if !a[:id].nil?
         author.update(a)
       else
         author = Author.create!(a)
       end
       author
-    }
+    end
     @model.update(params)
     render json: @model
   end
@@ -58,7 +58,7 @@ class BooksController < ApiController
   private
 
   def create_params
-    params.permit(:name, :summmary, :page_count, authors: [:first_name, :last_name, :group]).tap do |permitted_params|
+    params.permit(:name, :summmary, :page_count, authors: %i[first_name last_name group]).tap do |permitted_params|
       if permitted_params[:authors]
         permitted_params[:authors_attributes] = permitted_params[:authors]
         permitted_params.delete(:authors)
@@ -67,14 +67,11 @@ class BooksController < ApiController
   end
 
   def update_params
-    params.permit(:name, :summmary, :page_count, authors: [:id, :first_name, :last_name, :group])
+    params.permit(:name, :summmary, :page_count, authors: %i[id first_name last_name group])
   end
 
   def set_model
     @model = Book.where(id: params[:id]).first
-    if @model == nil
-      render plain: "Book Not Found!", status: :not_found
-    end
+    render plain: 'Book Not Found!', status: :not_found if @model.nil?
   end
-
 end

@@ -1,5 +1,5 @@
 class AiBooksController < ApplicationController
-  before_action :set_ai_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_ai_book, only: %i[show edit update destroy]
 
   # GET /ai_books
   # GET /ai_books.json
@@ -9,8 +9,7 @@ class AiBooksController < ApplicationController
 
   # GET /ai_books/1
   # GET /ai_books/1.json
-  def show
-  end
+  def show; end
 
   # GET /ai_books/new
   def new
@@ -18,8 +17,7 @@ class AiBooksController < ApplicationController
   end
 
   # GET /ai_books/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /ai_books
   # POST /ai_books.json
@@ -62,13 +60,14 @@ class AiBooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ai_book
-      @ai_book = AiBook.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ai_book_params
-      params.require(:ai_book).permit(:name, :summary, :page_count)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ai_book
+    @ai_book = AiBook.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ai_book_params
+    params.require(:ai_book).permit(:name, :summary, :page_count)
+  end
 end

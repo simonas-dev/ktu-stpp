@@ -1,0 +1,21 @@
+AllCops:
+  Exclude:
+    - 'spec/**/*'
+    - 'node_modules/**/*'
+    - 'db/**/*'     
+    - 'config/**/*'     
+    - 'script/**/*'
+    - 'bin/*'
+  TargetRubyVersion: 2.4
+
+Metrics/MethodLength:   
+  Max: 15
+
+Metrics/LineLength:
+  Max: 120
+
+FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

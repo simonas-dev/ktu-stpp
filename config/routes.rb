@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
   resources :ai_books
-  resources :books
   # Home
-  root to: "landing#index"
+  root to: 'landing#index'
 
   # Oauth2
   use_doorkeeper do
     skip_controllers :authorizations, :applications,
-      :authorized_applications
-  end  
+                     :authorized_applications
+  end
 
-  # RESTful API 
+  # RESTful API
   scope '/api' do
     scope '/v1' do
       post '/register' => 'auth#register'

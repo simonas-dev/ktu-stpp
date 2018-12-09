@@ -1,15 +1,15 @@
 class AuthorsController < ApiController
-  before_action :set_model, only: [
-    :show,
-    :update,
-    :destroy
+  before_action :set_model, only: %i[
+    show
+    update
+    destroy
   ]
-  before_action :doorkeeper_authorize!, only: [
-    :create,
-    :update,
-    :destroy
+  before_action :doorkeeper_authorize!, only: %i[
+    create
+    update
+    destroy
   ]
-  
+
   # GET /author
   def index
     @models = Author.all
@@ -48,9 +48,6 @@ class AuthorsController < ApiController
 
   def set_model
     @model = Author.where(id: params[:id]).first
-    if @model == nil
-      render plain: "Author Not Found!", status: :not_found
-    end
+    render plain: 'Author Not Found!', status: :not_found if @model.nil?
   end
-
 end
