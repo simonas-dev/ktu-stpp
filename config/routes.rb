@@ -1,14 +1,6 @@
 Rails.application.routes.draw do
-  get 'landing/index'
-
   # Home
   root to: "landing#index"
-  
-  # Admin
-  get "/admin", to: "admin#index"
-
-  # Devise
-  # devise_for :admins
 
   # Oauth2
   use_doorkeeper do
