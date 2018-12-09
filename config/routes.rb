@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :books
   # Home
   root to: "landing#index"
 
@@ -11,9 +12,8 @@ Rails.application.routes.draw do
   # RESTful API 
   scope '/api' do
     scope '/v1' do
-      scope '/register' do
-        post '/' => 'auth#register'
-      end
+      post '/register' => 'auth#register'
+      post '/login' => 'doorkeeper/tokens#create'
       scope '/author' do
         get '/' => 'authors#index'
         post '/' => 'authors#create'
