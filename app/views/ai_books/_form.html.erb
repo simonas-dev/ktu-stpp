@@ -1,0 +1,32 @@
+<%= form_with(model: ai_book, local: true) do |form| %>
+  <% if ai_book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ai_book.errors.count, "error") %> prohibited this ai_book from being saved:</h2>
+
+      <ul>
+      <% ai_book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :ai_book_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_field :summary, id: :ai_book_summary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :page_count %>
+    <%= form.number_field :page_count, id: :ai_book_page_count %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

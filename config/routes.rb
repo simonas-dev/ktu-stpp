@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ai_books
   resources :books
   # Home
   root to: "landing#index"

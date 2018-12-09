@@ -1,0 +1,2 @@
+module AiBooksHelper
+end

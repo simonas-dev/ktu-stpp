@@ -1,0 +1,2 @@
+class AiBook < ApplicationRecord
+end

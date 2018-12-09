@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ai_book.name %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @ai_book.summary %>
+</p>
+
+<p>
+  <strong>Page count:</strong>
+  <%= @ai_book.page_count %>
+</p>
+
+<%= link_to 'Edit', edit_ai_book_path(@ai_book) %> |
+<%= link_to 'Back', ai_books_path %>
