@@ -1,3 +1,6 @@
+# Kad tave šikantį sutrauktų kas parasė šita šudina, nelankstų,
+# toolą, po galais, rimtai negali lengvai parašyti savo projektui specifiškų
+# taisyklių??? Velniai rautų...
 AllCops:
   Exclude:
     - 'spec/**/*'
@@ -7,6 +10,9 @@ AllCops:
     - 'script/**/*'
     - 'bin/*'
   TargetRubyVersion: 2.4
+
+Style/SimplifyNotEmptyWithAny:
+  Enabled: true
 
 Metrics/MethodLength:   
   Max: 15
